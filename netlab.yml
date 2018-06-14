@@ -1,0 +1,7 @@
+---
+- name: install and configure webservers
+  hosts: netlab 
+  remote_user: docker
+  sudo: yes
+  roles:
+    - clients 

@@ -1,0 +1,9 @@
+- name: Install package appropriate to the distribution Type (Debian/Ubuntu)
+  command: "{{ cmd }}"
+  register: output
+  when: ansible_os_family == "Debian" 
+- name: Install package appropriate to the distribution Type (RedHat/CentOS)
+  command: "{{ cmd }}"
+  when: ansible_os_family == "RedHat"
+
+- debug: msg="{{ output.stdout }}"
