@@ -1,9 +1,15 @@
 - name: Install package appropriate to the distribution Type (Debian/Ubuntu)
   command: "{{ cmd }}"
-  register: output
+  register: result
+  ignore_errors: True
   when: ansible_os_family == "Debian" 
+- debug: msg="{{ result.stdout }}"
+  when: result.stdout is defined
+
 - name: Install package appropriate to the distribution Type (RedHat/CentOS)
   command: "{{ cmd }}"
+  register: result
+  ignore_errors: True
   when: ansible_os_family == "RedHat"
-
-- debug: msg="{{ output.stdout }}"
+- debug: msg="{{ result.stdout }}"  
+  when: result.stdout is defined

@@ -2,6 +2,7 @@
 ```
 ansible-playbook --version
 ansible-playbook netlab.yml -i hosts -l netlab --extra-vars "cmd='pip install awscli'" --user=docker --ask-pass
+ansible-playbook netlab.yml -i 10.254.243.100, --extra-vars "cmd='pip --version'" --user=docker
 ```
 ##### Verified commands:
 ```
