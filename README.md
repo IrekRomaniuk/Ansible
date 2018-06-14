@@ -7,8 +7,6 @@ ansible-playbook netlab.yml -i hosts -l netlab --extra-vars "cmd='pip install aw
 ```
 aws --version
 pip --version
-
-export ANSIBLE_HOST_KEY_CHECKING=False
 ```
 ### make sure ssh without password is possible and user is in sudoers
 
@@ -17,5 +15,6 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub docker@
 /etc/sudoers:
 docker ALL=(ALL:ALL) NOPASSWD:ALL
 
-
+.ansible.cfg
+export ANSIBLE_HOST_KEY_CHECKING=False
 
