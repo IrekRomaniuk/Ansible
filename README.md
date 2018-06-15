@@ -20,6 +20,7 @@ ansible-playbook -i hosts netlab.yml
 ansible playbook without python and roles
 ```
 ansible-playbook -i hosts cpraw.yml --extra-vars "cmd='uptime'"
+```
 ansible playbook with roles
 ```
 ansible-playbook netlab-roles.yml -i hosts -l netlab --extra-vars "cmd='pip install awscli'" --user=docker --ask-pass
