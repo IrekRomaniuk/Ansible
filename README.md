@@ -1,6 +1,6 @@
 ### Examples
 ```
-
+docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ ansible netlab,phantom,dc1,dc2 -i hosts -m command -a date
 ansible netlab -i hosts -m command -a date
 ansible all -i hosts -m command -a date
 ansible all -i 'localhost,' -c local -m ping
