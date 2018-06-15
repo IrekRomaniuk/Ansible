@@ -47,9 +47,27 @@ apt:
 ansible-doc apt
 
 ### State
-
+```
 - name: ensure sysstat is installed at version 10.2.0-1
   apt:
     name: sysstat=10.2.0-1
     state: installed
+```
 
+### Checkpoint related
+
+#### smb (gaia embedded)
+##### works fine with admin user in raw mode without expert (new_user with bashh is not necessary)
+```
+smb> add user new_user type admin password new_pass permission RW
+[Expert@smb]# bashUser on
+```
+#### regular gaia
+```
+gaia:0> 
+add user new_user uid 103 homedir /home/indeni
+set user new_user newpass new_pass
+add rba user new_user roles adminRole
+set user indeni shell /bin/bash
+save config
+```
