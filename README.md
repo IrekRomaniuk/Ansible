@@ -1,8 +1,13 @@
 ### Examples
 ```
+
+ansible netlab -i hosts -m command -a date
+ansible all -i hosts -m command -a date
+ansible all -i 'localhost,' -c local -m ping
 ansible-playbook --version
-ansible-playbook netlab.yml -i hosts -l netlab --extra-vars "cmd='pip install awscli'" --user=docker --ask-pass
-ansible-playbook netlab.yml -i 10.254.243.100, --extra-vars "cmd='pip --version'" --user=docker
+ansible-playbook -i hosts netlab.yml
+ansible-playbook netlab-roles.yml -i hosts -l netlab --extra-vars "cmd='pip install awscli'" --user=docker --ask-pass
+ansible-playbook netlab-roles.yml -i 10.254.243.100, --extra-vars "cmd='pip --version'" --user=docker
 ```
 ##### Verified commands:
 ```
@@ -18,4 +23,16 @@ docker ALL=(ALL:ALL) NOPASSWD:ALL
 
 .ansible.cfg
 export ANSIBLE_HOST_KEY_CHECKING=False
+
+### Doc
+
+apt:
+ansible-doc apt
+
+### State
+
+- name: ensure sysstat is installed at version 10.2.0-1
+  apt:
+    name: sysstat=10.2.0-1
+    state: installed
 

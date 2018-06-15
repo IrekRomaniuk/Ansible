@@ -1,7 +1,10 @@
 ---
-- name: install and configure webservers
-  hosts: all 
-  remote_user: docker
-  # sudo: yes
-  roles:
-    - clients 
+- hosts: netlab
+
+  become: true
+
+  tasks:
+    - name: ensure latest sysstat is installed
+      apt:
+        name: sysstat
+        state: latest
