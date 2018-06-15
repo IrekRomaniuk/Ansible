@@ -55,9 +55,8 @@ ansible-doc apt
 ```
 
 ### Checkpoint related
-
+##### works fine with admin user in ansible raw mode without Checkpoint expert (new_user with bash is not necessary)
 #### smb (gaia embedded)
-##### works fine with admin user in raw mode without expert (new_user with bashh is not necessary)
 ```
 smb> add user new_user type admin password new_pass permission RW
 [Expert@smb]# bashUser on
