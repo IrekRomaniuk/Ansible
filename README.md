@@ -6,6 +6,7 @@ ansible all -i hosts -m command -a date
 ansible all -i 'localhost,' -c local -m ping
 ansible-playbook --version
 ansible-playbook -i hosts netlab.yml
+ansible-playbook -i hosts cp.yml "cmd='uptime'"
 ansible-playbook netlab-roles.yml -i hosts -l netlab --extra-vars "cmd='pip install awscli'" --user=docker --ask-pass
 ansible-playbook netlab-roles.yml -i 10.254.243.100, --extra-vars "cmd='pip --version'" --user=docker
 ```
