@@ -31,7 +31,7 @@ ansible-playbook netlab-roles.yml -i 10.254.243.100, --extra-vars "cmd='pip --ve
 aws --version
 pip --version
 ```
-### make sure ssh without password is possible and user is in sudoers
+#### make sure ssh without password is possible and user is in sudoers
 
 ssh-copy-id -i ~/.ssh/id_rsa.pub docker@
 
