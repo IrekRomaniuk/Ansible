@@ -1,11 +1,11 @@
 ---
 - hosts: cp
   gather_facts: no
-  become: true
+  become: no
 
   tasks:
     - name: Run command on Checkpoints
-      command: "{{ cmd }}"
+      raw: "{{ cmd }}"
       register: result
       ignore_errors: True 
     - debug: msg="{{ result.stdout }}"
