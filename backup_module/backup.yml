@@ -1,0 +1,7 @@
+- hosts: localhost
+  tasks:
+    - name: backup /etc/default
+      backup: 
+        path: "/etc/default" 
+        backup_dir: "/var/backups"
+        timestamp: 20180616

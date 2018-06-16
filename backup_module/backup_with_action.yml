@@ -1,0 +1,5 @@
+- hosts: localhost
+  tasks:
+    - name: backup
+      backup: 
+        backup_dir: "/var/backups"
