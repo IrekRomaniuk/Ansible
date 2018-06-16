@@ -37,6 +37,10 @@ ansible playbook with roles
 ansible-playbook netlab-roles.yml -i hosts -l netlab --extra-vars "cmd='pip install awscli'" --user=docker --ask-pass
 ansible-playbook netlab-roles.yml -i 10.254.243.100, --extra-vars "cmd='pip --version'" --user=docker
 ```
+async action and polling
+```
+ansible-playbook -i hosts async_ping.yml
+```
 #### Verified commands:
 ```
 aws --version
