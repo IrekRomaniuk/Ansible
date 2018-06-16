@@ -1,0 +1,6 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Print a message
+      debug:
+        msg: "{{'test'|another_filter('the','filters')}}"
