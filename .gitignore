@@ -3,4 +3,4 @@ hosts
 id_rsa*
 vars/*
 .vscode
-pingcount/*
+output/*
