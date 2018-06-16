@@ -1,0 +1,9 @@
+- hosts: pingnet
+  tasks:
+    - name: example copying file with owner and permissions
+      copy:
+        src: the_pinger.py
+        dest: ./
+        owner: docker
+        group: docker
+        mode: u+r

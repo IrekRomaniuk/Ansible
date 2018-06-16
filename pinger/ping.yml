@@ -1,0 +1,12 @@
+---
+- hosts: pingnet
+  remote_user: docker
+  tasks:
+  - name: Run and wait for up to 15 sec, poll every 5 sec
+    command: python the_pinger.py | wc -l
+    async: 10
+    poll: 3
+    register: result
+    ignore_errors: True 
+  - debug: msg="{{ result.stdout }} "
+    when: result.stdout is defined
