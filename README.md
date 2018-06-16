@@ -11,7 +11,7 @@ ansible all -i 'localhost,' -c local -m ping
 ansible cli to run local command on remote targets
 ```
 docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ ansible all -i '10.34.1.100,10.41.1.100,' -m command -a 'which pingnet'
-docker@R90HE73F:$ ansible all -i '10.41.1.100,' -m command -a './pingnet'
+docker@R90HE73F:$ ansible all -i '10.41.1.100,' -m command -a pingnet
 docker@R90HE73F:$ ansible all -i '10.34.1.100,' -m command -a pingnet
 ....
 10.207.249.1
