@@ -39,7 +39,7 @@ ansible-playbook netlab-roles.yml -i 10.254.243.100, --extra-vars "cmd='pip --ve
 ```
 async action and polling
 ```
-ansible-playbook -i hosts async_ping.yml > output/pincount.pingnet
+ansible-playbook -i hosts async_ping.yml > output/pingcount.pingnet
 ```
 #### Verified commands:
 ```

@@ -19,10 +19,12 @@ out_q = Queue.Queue()
 
 # build IP array
 ips = []
+payload={}
+payload['msg']=[]
 
 dir = os.path.dirname(os.path.abspath(__file__))
 targets_file = os.path.join(dir, "pinglist.txt")
-print targets_file
+# print targets_file
 try:
   with open(targets_file, 'r') as f:
     ips = f.readlines()
@@ -30,7 +32,7 @@ except IOError:
   for i in range(1,200):
     ips.append("10.192."+str(i)+".1")
     
-print("First: {} Last: {}".format(ips[0],ips[len(ips)-1]))
+# print("First: {} Last: {}".format(ips[0],ips[len(ips)-1]))
 print('Numbers of address to ping {}'.format(len(ips)))
 # sys.exit(0)
 # thread code : wraps system ping command
@@ -76,4 +78,6 @@ while True:
     msg = out_q.get_nowait()
   except Queue.Empty:
     break
-  print msg
+  # print msg
+  payload['msg'].append(msg)
+print len(payload['msg'])  
