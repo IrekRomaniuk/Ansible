@@ -4,3 +4,5 @@ id_rsa*
 vars/*
 .vscode
 output/*
+vault.yml
+group_vars/*
