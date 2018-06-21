@@ -1,11 +1,12 @@
 - hosts: pingnet
   vars:
     jobids: [] 
+    # file with list of targets to ping
     targets: pinglist.txt # pinglist-all.txt pinglist.txt
     threads: 200
-    # files with results from both DCs
+    # prefix for results from both DCs (theping.py results pulled from DCs)
     output: ping-result
-    # file with unique addresses
+    # inventory with unique addresses (thediff.py results pushed to both DCs)
     bothDC: pingfull.yml
   tasks:
     - name: Copying files to DC1 and DC2

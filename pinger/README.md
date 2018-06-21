@@ -2,11 +2,11 @@
 #### based on the fork from [sourceperl/th_pinger.py](https://gist.github.com/irom77/794c18ba392e42e944b09c42493b1786)
 
 - Copy list of targets in file 'pinglist.txt' or 'pinglist-all.txt' to both hosts and run 'theping.py' 
-- Fetch results to the local 'fetched' dir and run 'thediff.py' to find diff and unique targets
+- Fetch results (files with 'ping-result' prefix) to the local 'fetched' dir and run 'thediff.py' to find diff and unique targets
 - Copy back inventory 'pingfull.yml' with unique targets to both hosts 
 
 #### Todo:
-- add sections 'dc1notdc2' and 'dc2notdc1' in the inventory
+- add sections 'dc1notdc2' and 'dc2notdc1' in the 'pingfull.yml' inventory
 - pick random targets and ssh to run command
 
 #### Usefull commands
