@@ -3,9 +3,12 @@
     jobids: [] 
     targets: pinglist.txt # pinglist-all.txt pinglist.txt
     threads: 200
+    # files with results from both DCs
     output: ping-result
+    # file with unique addresses
+    bothDC: pingfull.yml
   tasks:
-    - name: Copying theping.py to DC1 and DC2
+    - name: Copying files to DC1 and DC2
       copy:
         src: "{{ item }}"        
         dest: ./
@@ -15,7 +18,9 @@
       with_items:
           - theping.py
           - pinglist-all.txt
-          - pinglist.txt  
+          - pinglist.txt
+      tags: 
+        - local      
     - name: Ping from DC1
       command: python theping.py -t {{threads}} -f {{targets}} -o {{output}}
       when: ansible_hostname == 'dc01ap-p001mon'
@@ -48,17 +53,27 @@
       retries: 50
     - debug: msg="{{ jobs_result.results[0].stdout }}" # or stdout_lines
       # when: jobs_result.results[0].stdout is defined
-    - fetch: 
+    - name: Fetching files from DC1 and DC2  
+      fetch: 
         src: ./{{output}}.yml 
         dest: ./fetched/{{output + "-" + ansible_hostname }}.yml
         flat: yes
+      tags: 
+        - local  
+    # ansible-playbook pinger/copy_and_ping.yml --tags local  
+    # docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ 
+    # python pinger/thediff.py -f pinger/pingfull.yml -dc1 pinger/fetched/ping-result-dc01ap-p001mon.yml -dc2 pinger/fetched/ping-result-dc02ap-p001mon.yml  
     - name: Find diff
-      command: python thediff.py
+      local_action: command python thediff.py -f {{bothDC}} -dc1 fetched/ping-result-dc01ap-p001mon.yml -dc2 fetched/ping-result-dc02ap-p001mon.yml
+      tags: 
+        - local
     - name: Copying pingfull.yml back  to DC1 and DC2
       copy:
-        src: "pingfull.yml"        
+        src: "{{bothDC}}"       
         dest: ./
         owner: docker
         group: docker
-        mode: u+r   
+        mode: u+r 
+      tags: 
+        - local   
 
