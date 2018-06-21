@@ -13,7 +13,7 @@ import sys
 from argparse import ArgumentParser
 
 parser = ArgumentParser(description="Ping targets from file using threats")
-parser.add_argument("-f", "--file", dest="targets", default="pinglist.txt",
+parser.add_argument("-f", "--file", dest="target", default="pinglist.txt",
                     help="list of targets to ping", metavar="TARGET FILE")
 parser.add_argument("-t", "--threads", dest="num_threads", type=int, default=100,
                     help="number of threads", metavar="NUM OF THREATS")
@@ -33,15 +33,14 @@ payload={}
 payload['msg']=[]
 
 dir = os.path.dirname(os.path.abspath(__file__))
-targets_file = os.path.join(dir, args.targets)
+targets_file = os.path.join(dir, args.target)
 # print targets_file
 try:
   with open(targets_file, 'r') as f:
     ips = f.readlines()
 except IOError:    
   for i in range(1,200):
-    print('0/0')
-    sys.exit("target file " + args.target + " not found")
+    ips.append("10.192."+str(i)+".1")
     
 # print("First: {} Last: {}".format(ips[0],ips[len(ips)-1]))
 
