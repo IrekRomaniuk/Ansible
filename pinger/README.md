@@ -1,6 +1,20 @@
 ### pinger
 #### based on the fork from [sourceperl/th_pinger.py](https://gist.github.com/irom77/794c18ba392e42e944b09c42493b1786)
 
+Usefull commands
+```
+ansible-playbook pinger/copy_and_ping.yml --tags local
+docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ ansible pingnet -a 'ls -l pinglist.txt' -o
+10.34.1.100 | CHANGED | rc=0 | (stdout) -rw-rw-r--. 1 docker docker 14444 Jul 14  2017 pinglist.txt
+10.41.1.100 | CHANGED | rc=0 | (stdout) -rw-rw-r--. 1 docker docker 14444 Jun 21 13:19 pinglist.txt
+docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ ansible pingnet -a 'ls -l pinglist-all.txt' -o
+10.34.1.100 | CHANGED | rc=0 | (stdout) -rw-rw-r--. 1 docker docker 27696 Aug 11  2016 pinglist-all.txt
+10.41.1.100 | CHANGED | rc=0 | (stdout) -rw-rw-r--. 1 docker docker 27696 Jun 21 12:10 pinglist-all.txt
+docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ ansible pingnet -a 'ls -l pingfull.yml' -o
+10.34.1.100 | CHANGED | rc=0 | (stdout) -rw-rw-r--. 1 docker docker 15593 Jun 21 15:54 pingfull.yml
+10.41.1.100 | CHANGED | rc=0 | (stdout) -rw-rw-r--. 1 docker docker 15593 Jun 21 15:54 pingfull.yml
+```
+Playbook
 ```
 docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ ansible-playbook pinger/copy_and_ping.yml
 
