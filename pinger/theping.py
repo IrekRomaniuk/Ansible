@@ -16,7 +16,7 @@ from argparse import ArgumentParser
 parser = ArgumentParser(description="Ping targets from file using threats")
 parser.add_argument("-f", "--file", dest="targets", default="pinglist.txt",
                     help="list of targets to ping", metavar="TARGET FILE")
-parser.add_argument("-o", "--output", dest="output", default="ping-result.yml",
+parser.add_argument("-o", "--output", dest="output", default="ping-result",
                     help="results", metavar="OUTPUT FILE")                    
 parser.add_argument("-t", "--threads", dest="num_threads", type=int, default=100,
                     help="number of threads", metavar="NUM OF THREATS")
@@ -95,5 +95,5 @@ while True:
   # print msg
   payload['msg'].append(msg)
 print('{}/{}'.format(len(payload['msg']), len(ips)))
-with open(args.output, 'w') as outfile:
+with open(args.output+'.yml', 'w') as outfile:
     yaml.dump(payload, outfile, default_flow_style=False)

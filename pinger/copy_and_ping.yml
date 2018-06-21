@@ -3,7 +3,7 @@
     jobids: [] 
     targets: pinglist.txt # pinglist-all.txt pinglist.txt
     threads: 200
-    output: ping-result.yml
+    output: ping-result
   tasks:
     - name: Copying theping.py to DC1 and DC2
       copy:
@@ -47,7 +47,18 @@
       until: jobs_result.finished
       retries: 50
     - debug: msg="{{ jobs_result.results[0].stdout }}" # or stdout_lines
-      # when: jobs_result.stdout is defined
+      # when: jobs_result.results[0].stdout is defined
     - fetch: 
-        src: ./{{output}}  
-        dest: ./fetched
+        src: ./{{output}}.yml 
+        dest: ./fetched/{{output + "-" + ansible_hostname }}.yml
+        flat: yes
+    - name: Find diff
+      command: python thediff.py
+    - name: Copying pingfull.yml back  to DC1 and DC2
+      copy:
+        src: "pingfull.yml"        
+        dest: ./
+        owner: docker
+        group: docker
+        mode: u+r   
+
