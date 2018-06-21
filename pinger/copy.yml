@@ -2,7 +2,7 @@
   tasks:
     - name: example copying file with owner and permissions
       copy:
-        src: the_pinger.py
+        src: theping.py
         dest: ./
         owner: docker
         group: docker

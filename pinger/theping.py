@@ -33,7 +33,7 @@ except IOError:
     ips.append("10.192."+str(i)+".1")
     
 # print("First: {} Last: {}".format(ips[0],ips[len(ips)-1]))
-print('Numbers of address to ping {}'.format(len(ips)))
+
 # sys.exit(0)
 # thread code : wraps system ping command
 def thread_pinger(i, q):
@@ -80,4 +80,4 @@ while True:
     break
   # print msg
   payload['msg'].append(msg)
-print len(payload['msg'])  
+print('{}/{}'.format(len(payload['msg']), len(ips)))

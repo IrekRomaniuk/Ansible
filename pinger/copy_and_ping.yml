@@ -1,17 +1,43 @@
 - hosts: pingnet
+  vars:
+    jobids: []  
   tasks:
-    - name: example copying file with owner and permissions
+    - name: Copying theping.py to DC1 and DC2
       copy:
-        src: the_pinger.py
+        src: theping.py
         dest: ./
         owner: docker
         group: docker
         mode: u+r
-    - name: Run and wait for up to 15 sec, poll every 3 sec
-      command: python the_pinger.py
+    - name: Ping from DC1
+      command: python theping.py
+      when: ansible_hostname == 'dc01ap-p001mon'
       async: 10
-      poll: 3
-      register: result
+      poll: 0
+      register: result1
       ignore_errors: True 
-    - debug: msg="{{ result.stdout }} "
-      when: result.stdout is defined
+    - name: Ping from DC2
+      command: python theping.py
+      when: ansible_hostname == 'dc02ap-p001mon'
+      async: 10
+      poll: 0
+      register: result2
+      ignore_errors: True 
+    - name: Capture Job IDs
+      set_fact:
+        jobids: >
+                {% if item.ansible_job_id is defined -%}
+                  {{ jobids + [item.ansible_job_id] }}
+                {% else -%}
+                  {{ jobids }}
+                {% endif %}
+      with_items: "{{ [ result1, result2 ] }}"
+    - name: 'Wait for Job IDs'
+      async_status:
+         jid: "{{ item }}"
+      with_items: "{{ jobids }}"
+      register: jobs_result
+      until: jobs_result.finished
+      retries: 30
+    - debug: msg="{{ jobs_result.results[0].stdout }}" # or stdout_lines
+      # when: jobs_result.stdout is defined
