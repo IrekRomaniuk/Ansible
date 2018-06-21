@@ -5,11 +5,11 @@
 - Fetch results to the local 'fetched' dir and run 'thediff.py' to find diff and unique targets
 - Copy back inventory 'pingfull.yml' with unique targets to both hosts 
 
-##### Todo:
+#### Todo:
 - add sections 'dc1notdc2' and 'dc2notdc1' in the inventory
 - pick random targets and ssh to run command
 
-Usefull commands
+#### Usefull commands
 ```
 ansible-playbook pinger/copy_and_ping.yml --tags local
 docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ ansible pingnet -a 'ls -l pinglist.txt' -o
@@ -22,7 +22,7 @@ docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ ansible pingnet -a 'ls -l pin
 10.10.1.100 | CHANGED | rc=0 | (stdout) -rw-rw-r--. 1 docker docker 15593 Jun 21 15:54 pingfull.yml
 10.20.1.100 | CHANGED | rc=0 | (stdout) -rw-rw-r--. 1 docker docker 15593 Jun 21 15:54 pingfull.yml
 ```
-Playbook
+#### Playbook
 ```
 docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ ansible-playbook pinger/copy_and_ping.yml
 
