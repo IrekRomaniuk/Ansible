@@ -7,3 +7,4 @@ output/*
 vault.yml
 group_vars/*
 pinger/pinglist*
+pinger/fetched/*

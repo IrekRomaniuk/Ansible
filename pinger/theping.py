@@ -10,11 +10,14 @@ import Queue
 import re
 import os
 import sys
+import yaml
 from argparse import ArgumentParser
 
 parser = ArgumentParser(description="Ping targets from file using threats")
 parser.add_argument("-f", "--file", dest="targets", default="pinglist.txt",
                     help="list of targets to ping", metavar="TARGET FILE")
+parser.add_argument("-o", "--output", dest="output", default="ping-result.yml",
+                    help="results", metavar="OUTPUT FILE")                    
 parser.add_argument("-t", "--threads", dest="num_threads", type=int, default=100,
                     help="number of threads", metavar="NUM OF THREATS")
 
@@ -65,7 +68,7 @@ def thread_pinger(i, q):
       search = re.search(r'rtt min/avg/max/mdev = (.*)/(.*)/(.*)/(.*) ms',
                          p_ping_out, re.M|re.I)
       ping_rtt = search.group(2)
-      out_q.put("OK " + str(ip) + " rtt= "+ ping_rtt)
+      out_q.put(str(ip) + ":"+ ping_rtt)
 
     # update queue : this ip is processed
     q.task_done()
@@ -92,3 +95,5 @@ while True:
   # print msg
   payload['msg'].append(msg)
 print('{}/{}'.format(len(payload['msg']), len(ips)))
+with open(args.output, 'w') as outfile:
+    yaml.dump(payload, outfile, default_flow_style=False)

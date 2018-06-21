@@ -1,8 +1,9 @@
 - hosts: pingnet
   vars:
     jobids: [] 
-    targets: pinglist.txt
+    targets: pinglist.txt # pinglist-all.txt pinglist.txt
     threads: 200
+    output: ping-result.yml
   tasks:
     - name: Copying theping.py to DC1 and DC2
       copy:
@@ -14,16 +15,16 @@
       with_items:
           - theping.py
           - pinglist-all.txt
-          #- pinglist.txt  
+          - pinglist.txt  
     - name: Ping from DC1
-      command: python theping.py -t {{threads}} -f {{targets}}
+      command: python theping.py -t {{threads}} -f {{targets}} -o {{output}}
       when: ansible_hostname == 'dc01ap-p001mon'
       async: 30
       poll: 0
       register: result1
       ignore_errors: True 
     - name: Ping from DC2
-      command: python theping.py -t {{threads}} -f {{targets}}
+      command: python theping.py -t {{threads}} -f {{targets}} -o {{output}}
       when: ansible_hostname == 'dc02ap-p001mon'
       async: 30
       poll: 0
@@ -47,3 +48,6 @@
       retries: 50
     - debug: msg="{{ jobs_result.results[0].stdout }}" # or stdout_lines
       # when: jobs_result.stdout is defined
+    - fetch: 
+        src: ./{{output}}  
+        dest: ./fetched
