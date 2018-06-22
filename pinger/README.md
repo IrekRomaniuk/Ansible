@@ -22,7 +22,7 @@ docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ ansible pingnet -a 'ls -l pin
 10.10.1.100 | CHANGED | rc=0 | (stdout) -rw-rw-r--. 1 docker docker 15593 Jun 21 15:54 pingfull.yml
 10.20.1.100 | CHANGED | rc=0 | (stdout) -rw-rw-r--. 1 docker docker 15593 Jun 21 15:54 pingfull.yml
 ```
-Dynamic inventory
+### Dynamic inventory
 ```
 docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ python pinger/pinginv.py --list --file pinger/pingfull.1.yml
 {
