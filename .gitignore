@@ -9,3 +9,4 @@ group_vars/*
 pinger/ping*
 pinger/fetched/*
 vault*
+ping*
