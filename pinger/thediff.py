@@ -17,7 +17,7 @@ parser.add_argument("-f", "--full", dest="full", default="pinger/pingfull.yml",
 
 
 args = parser.parse_args()
-dc_dict={}
+dc_dict={'pingfull':{'hosts':[]},'dc1notdc2':{'hosts':[]},'dc2notdc1':{'hosts':[]}}
 dc1_dict = yaml.load(open(args.dc1))
 dc2_dict = yaml.load(open(args.dc2))
 
@@ -28,11 +28,11 @@ dc2_list=[item.split(':')[0] for item in dc2_dict['msg']]
 
 # print('{} {}'.format(len(dc1_list),len(dc2_list)))
 
-dc_dict['pingfull'] = list(set(dc1_list + dc2_list))
+dc_dict['pingfull']['hosts'] = list(set(dc1_list + dc2_list))
 
 print('Number of unique address: {}'.format(len(dc_dict['pingfull'])))
 print('Address in DC1 but not in DC2: {}'.format(diff(dc1_list, dc2_list)))
 print('Address in DC2 but not in DC1: {}'.format(diff(dc2_list, dc1_list)))
 
 with open(args.full, 'w') as outfile:
-    yaml.dump(dc_dict, outfile, default_flow_style=False)
+    yaml.dump(dc_dict, outfile, default_flow_style=True)

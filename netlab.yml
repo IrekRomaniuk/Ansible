@@ -1,5 +1,6 @@
 ---
-- hosts: netlab
+# ansible-playbook -i hosts.1.yml -l netlab netlab.yml
+- hosts: all
   # gather_facts: no
   become: true
 

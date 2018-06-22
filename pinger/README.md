@@ -22,6 +22,25 @@ docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ ansible pingnet -a 'ls -l pin
 10.10.1.100 | CHANGED | rc=0 | (stdout) -rw-rw-r--. 1 docker docker 15593 Jun 21 15:54 pingfull.yml
 10.20.1.100 | CHANGED | rc=0 | (stdout) -rw-rw-r--. 1 docker docker 15593 Jun 21 15:54 pingfull.yml
 ```
+Dynamic inventory
+```
+docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ python pinger/pinginv.py --list --file pinger/pingfull.1.yml
+{
+    "dc1notdc2": {
+        "hosts": []
+    },
+    "dc2notdc1": {
+        "hosts": []
+    },
+    "pingfull": {
+        "hosts": [
+            "10.197.143.1",
+            "10.197.71.1",
+            "10.195.89.1"
+        ]
+    }
+}
+```
 #### Playbook
 ```
 docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ ansible-playbook pinger/copy_and_ping.yml

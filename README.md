@@ -85,3 +85,16 @@ add rba user new_user roles adminRole
 set user indeni shell /bin/bash
 save config
 ```
+
+#### dynamic inventory
+
+```
+docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ python hosts.dump.1.py
+docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ cat hosts.yml
+{dc2: {hosts: [3.3.3.3, 4.4.4.4]}, netlab: {hosts: [1.1.1.1, 2.2.2.2]}}
+docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ python hosts.inv.py --list
+docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ ansible-playbook -i hosts.inv.py -l netlab netlab.yml
+
+PLAY [all] 
+...
+```
