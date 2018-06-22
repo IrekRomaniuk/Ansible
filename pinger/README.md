@@ -12,19 +12,19 @@
 #### Usefull commands
 ```
 ansible-playbook pinger/copy_and_ping.yml --tags local
-docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ ansible pingnet -a 'ls -l pinglist.txt' -o
+docker@me:/mnt/c/Users/irekromaniuk/Ansible$ ansible pingnet -a 'ls -l pinglist.txt' -o
 10.10.1.100 | CHANGED | rc=0 | (stdout) -rw-rw-r--. 1 docker docker 14444 Jul 14  2017 pinglist.txt
 10.20.1.100 | CHANGED | rc=0 | (stdout) -rw-rw-r--. 1 docker docker 14444 Jun 21 13:19 pinglist.txt
-docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ ansible pingnet -a 'ls -l pinglist-all.txt' -o
+docker@me:/mnt/c/Users/irekromaniuk/Ansible$ ansible pingnet -a 'ls -l pinglist-all.txt' -o
 10.10.1.100 | CHANGED | rc=0 | (stdout) -rw-rw-r--. 1 docker docker 27696 Aug 11  2016 pinglist-all.txt
 10.20.1.100 | CHANGED | rc=0 | (stdout) -rw-rw-r--. 1 docker docker 27696 Jun 21 12:10 pinglist-all.txt
-docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ ansible pingnet -a 'ls -l pingfull.yml' -o
+docker@me:/mnt/c/Users/irekromaniuk/Ansible$ ansible pingnet -a 'ls -l pingfull.yml' -o
 10.10.1.100 | CHANGED | rc=0 | (stdout) -rw-rw-r--. 1 docker docker 15593 Jun 21 15:54 pingfull.yml
 10.20.1.100 | CHANGED | rc=0 | (stdout) -rw-rw-r--. 1 docker docker 15593 Jun 21 15:54 pingfull.yml
 ```
 ### Dynamic inventory
 ```
-docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ python pinger/pinginv.py --list --file pinger/pingfull.1.yml
+docker@me:/mnt/c/Users/irekromaniuk/Ansible$ python pinger/pinginv.py --list --file pinger/pingfull.1.yml
 {
     "dc1notdc2": {
         "hosts": []
@@ -43,7 +43,7 @@ docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ python pinger/pinginv.py --li
 ```
 #### Playbook
 ```
-docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ ansible-playbook pinger/copy_and_ping.yml
+docker@me:/mnt/c/Users/irekromaniuk/Ansible$ ansible-playbook pinger/copy_and_ping.yml
 
 PLAY [pingnet] *****************************************************************************************************************************************************************************************************************
 TASK [Gathering Facts] *********************************************************************************************************************************************************************************************************ok: [10.10.1.100]

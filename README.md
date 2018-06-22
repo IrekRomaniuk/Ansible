@@ -2,7 +2,7 @@
 
 ansible cli
 ```
-docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ ansible netlab,phantom,dc1,dc2 -i hosts -m command -a date
+docker@me:/mnt/c/Users/irekromaniuk/Ansible$ ansible netlab,phantom,dc1,dc2 -i hosts -m command -a date
 ansible netlab -i hosts -m command -a date
 ansible all -i hosts -m command -a date
 ansible cp -i hosts -m raw -a uptime
@@ -11,8 +11,8 @@ ansible all -i 'localhost,' -c local -m ping
 ansible cli to run local command on remote targets
 ```
 ansible all -i '10.34.1.100,10.41.1.100,' -m command -a pingnet > pingcount
-docker@R90HE73F:$ ansible all -i '10.41.1.100,' -m command -a pingnet
-docker@R90HE73F:$ ansible all -i '10.34.1.100,' -m command -a pingnet
+docker@me:$ ansible all -i '10.41.1.100,' -m command -a pingnet
+docker@me:$ ansible all -i '10.34.1.100,' -m command -a pingnet
 ....
 10.207.249.1
 ....
@@ -89,11 +89,11 @@ save config
 #### dynamic inventory
 
 ```
-docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ python hosts.dump.1.py
-docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ cat hosts.yml
+docker@me:/mnt/c/Users/irekromaniuk/Ansible$ python hosts.dump.1.py
+docker@me:/mnt/c/Users/irekromaniuk/Ansible$ cat hosts.yml
 {dc2: {hosts: [3.3.3.3, 4.4.4.4]}, netlab: {hosts: [1.1.1.1, 2.2.2.2]}}
-docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ python hosts.inv.py --list
-docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ ansible-playbook -i hosts.inv.py -l netlab netlab.yml
+docker@me:/mnt/c/Users/irekromaniuk/Ansible$ python hosts.inv.py --list
+docker@me:/mnt/c/Users/irekromaniuk/Ansible$ ansible-playbook -i hosts.inv.py -l netlab netlab.yml
 
 PLAY [all] 
 ...
