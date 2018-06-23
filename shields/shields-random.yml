@@ -1,11 +1,12 @@
 - hosts: localhost
   tasks:
-  - add_host:
+  - add_host:      
       name: "{{ item }}"
       groups: random_host
-    with_random_choice: "{{ groups['pingfull']  }}"
-#- hosts: random_host
-- hosts: 10.199.107.1
+    #with_random_choice: "{{ groups['pingfull'] }}"
+    with_items: "{{ groups['pingfull'] | random }}"
+- hosts: random_host
+#- hosts: 10.199.107.1
   gather_facts: no  
   tasks:
     #- debug: var=inventory_hostname

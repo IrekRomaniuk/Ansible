@@ -1,13 +1,6 @@
-- hosts: all
+- hosts: "{{ groups['pingfull'] | shuffle }}"
   gather_facts: no
-  tasks:
-    - group_by: key=limited_selection
-      when: play_hosts.index(inventory_hostname) < 3 | int
-
-- hosts: limited_selection
-  gather_facts: no
-  tasks:
-    - debug: msg="I'm in the limited selection group!"
+  serial: 3
   tasks:
     - name: task against the limited selection group
       raw: "{{ cmd }}"

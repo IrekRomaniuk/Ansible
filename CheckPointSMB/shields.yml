@@ -1,9 +1,0 @@
----
-- hosts: pingfull
-  tasks:
-    - name: Get Prompt
-      raw: "{{ cmd }}"
-      register: result
-      ignore_errors: True 
-    - debug: msg="{{ result.stdout }}"
-      when: result.stdout is defined

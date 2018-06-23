@@ -1,0 +1,15 @@
+- hosts: all
+  gather_facts: no
+  tasks:
+    - group_by: key=subset
+      when: play_hosts.index(inventory_hostname) < 3 | int
+
+- hosts: subset
+  gather_facts: no
+  tasks:
+    - name: task against the limited selection group
+      raw: "{{ cmd }}"
+      register: result
+      #ignore_errors: True 
+    - debug: msg="{{ result.stdout }}"
+      when: result.stdout is defined
