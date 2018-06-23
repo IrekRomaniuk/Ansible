@@ -26,7 +26,7 @@ ansible smb -i hosts -m raw -a uptime
 ansbile playbook without roles
 ```
 ansible-playbook --version
-ansible-playbook -i hosts netlab.yml
+ansible-playbook -i hosts play-netlab.yml
 ```
 ansible playbook without python and roles
 ```
@@ -34,8 +34,8 @@ ansible-playbook -i hosts cpraw.yml --extra-vars "cmd='uptime'"
 ```
 ansible playbook with roles
 ```
-ansible-playbook netlab-roles.yml -i hosts -l netlab --extra-vars "cmd='pip install awscli'" --user=docker --ask-pass
-ansible-playbook netlab-roles.yml -i 10.254.243.100, --extra-vars "cmd='pip --version'" --user=docker
+ansible-playbook play-netlab-roles.yml -i hosts -l netlab --extra-vars "cmd='pip install awscli'" --user=docker --ask-pass
+ansible-playbook play-netlab-roles.yml -i 10.254.243.100, --extra-vars "cmd='pip --version'" --user=docker
 ```
 async action and polling
 ```
@@ -93,7 +93,7 @@ docker@me:/mnt/c/Users/irekromaniuk/Ansible$ python hosts.dump.1.py
 docker@me:/mnt/c/Users/irekromaniuk/Ansible$ cat hosts.yml
 {dc2: {hosts: [3.3.3.3, 4.4.4.4]}, netlab: {hosts: [1.1.1.1, 2.2.2.2]}}
 docker@me:/mnt/c/Users/irekromaniuk/Ansible$ python hosts.inv.py --list
-docker@me:/mnt/c/Users/irekromaniuk/Ansible$ ansible-playbook -i hosts.inv.py -l netlab netlab.yml
+docker@me:/mnt/c/Users/irekromaniuk/Ansible$ ansible-playbook -i hosts.inv.py -l netlab play-netlab.yml
 
 PLAY [all] 
 ...

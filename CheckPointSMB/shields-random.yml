@@ -1,0 +1,17 @@
+- hosts: localhost
+  tasks:
+  - add_host:
+      name: "{{ item }}"
+      groups: random_host
+    with_random_choice: "{{ groups['pingfull']  }}"
+#- hosts: random_host
+- hosts: 10.199.107.1
+  gather_facts: no  
+  tasks:
+    #- debug: var=inventory_hostname
+    - name: task against random_host
+      raw: "{{ cmd }}"
+      register: result
+      #ignore_errors: True 
+    - debug: msg="{{ result.stdout }}"
+      when: result.stdout is defined    

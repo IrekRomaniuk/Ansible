@@ -24,6 +24,14 @@ docker@me:/mnt/c/Users/irekromaniuk/Ansible$ ansible pingnet -a 'ls -l pingfull.
 ```
 ### Dynamic inventory
 ```
+docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible$ python pinger/pinginv.py -h
+usage: pinginv.py [-h] [--list] [--host HOST] --file FILE
+
+optional arguments:
+  -h, --help   show this help message and exit
+  --list       list inventory
+  --host HOST  show HOST variables
+  --file FILE  YAML file to read inventory from
 docker@me:/mnt/c/Users/irekromaniuk/Ansible$ python pinger/pinginv.py --list --file pinger/pingfull.1.yml
 {
     "dc1notdc2": {

@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+  - set_fact: random_host="{{ groups['pingfull'] | random }}" # groups.all
+#- hosts: 10.199.107.1
+- hosts: random_host
+  tasks:
+    - name: task against random_host
+      raw: "{{ cmd }}"
+      register: result
+      #ignore_errors: True 
+    - debug: msg="{{ result.stdout }}"
+      when: result.stdout is defined
+    
