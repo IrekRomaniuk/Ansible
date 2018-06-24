@@ -1,8 +1,14 @@
+### Fetch inventory
+```
+ansible-playbook shields-inventory.yml
+docker@me:/mnt/c/Users/irekromaniuk/Ansible/shields$ fetched/
+pingfull.yml
+```
 ### Dyn inventory
 ```
-docker@me:/mnt/c/Users/irekromaniuk/Ansible$ python pinger/pinginv.py --list --file pinger/pingfull.yml
+docker@me:/mnt/c/Users/irekromaniuk/Ansible/shields$ python fetched/pingfull.py --list --file fetched/pingfull.yml
 ```
 ### Run command
 ```
-docker@me:/mnt/c/Users/irekromaniuk/Ansible$ ansible-playbook -i pinger/pinginv.py shields/shields-random.yml -e "cmd=hostname" -e "ansible_user=ansible ansible_ssh_pass=password"
+docker@me:/mnt/c/Users/irekromaniuk/Ansible/shieldse$ ansible-playbook -i fetched/pingfull.py shields-random.yml -e "cmd=hostname" -e "ansible_user=ansible ansible_ssh_pass=password"
 ```

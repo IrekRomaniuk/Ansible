@@ -1,0 +1,10 @@
+- hosts: pingnet
+  tasks:
+  - name: Fetching from DC1 and DC2  
+    fetch: 
+      src: ./{{item}} 
+      dest: ./fetched/
+      flat: yes
+    with_items: 
+      - pingfull.yml
+      - pingfull.py

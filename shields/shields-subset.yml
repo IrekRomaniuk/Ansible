@@ -1,8 +1,9 @@
-- hosts: "{{ groups['pingfull'] | shuffle }}"
+- hosts: "{{ groups['pingfull'][0:100] | shuffle }}"
   gather_facts: no
+  #max_fail_percentage: 50
   serial: 3
   tasks:
-    - name: task against the limited selection group
+    - name: task against the sample of inventory
       raw: "{{ cmd }}"
       register: result
       #ignore_errors: True 

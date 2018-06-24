@@ -8,6 +8,7 @@
     output: ping-result
     # inventory with unique addresses (thediff.py results pushed to both DCs)
     bothDC: pingfull.yml
+    dyninv: pingfull.py
   tasks:
     - name: Copying files to DC1 and DC2
       copy:
@@ -68,13 +69,17 @@
       local_action: command python thediff.py -f {{bothDC}} -dc1 fetched/ping-result-dc01ap-p001mon.yml -dc2 fetched/ping-result-dc02ap-p001mon.yml
       tags: 
         - local
-    - name: Copying pingfull.yml back  to DC1 and DC2
+    - name: Copying pingfull.yml and pingfull.py to DC1 and DC2
       copy:
-        src: "{{bothDC}}"       
+        src: "{{item}}"       
         dest: ./
         owner: docker
         group: docker
         mode: u+r 
+      with_items: 
+        - "{{bothDC}}"
+        - "{{dyninv}}"  
       tags: 
-        - local   
+        - pingfull
+          
 
