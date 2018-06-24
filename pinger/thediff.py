@@ -29,6 +29,8 @@ dc2_list=[item.split(':')[0] for item in dc2_dict['msg']]
 # print('{} {}'.format(len(dc1_list),len(dc2_list)))
 
 dc_dict['pingfull']['hosts'] = list(set(dc1_list + dc2_list))
+dc_dict['dc1notdc2']['hosts'] = diff(dc1_list, dc2_list)
+dc_dict['dc2notdc1']['hosts'] = diff(dc2_list, dc1_list)
 
 print('Number of unique address: {}'.format(len(dc_dict['pingfull'])))
 print('Address in DC1 but not in DC2: {}'.format(diff(dc1_list, dc2_list)))

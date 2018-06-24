@@ -11,7 +11,7 @@
 
 #### Usefull commands
 ```
-ansible-playbook /pinger.yml --tags local
+ansible-playbook pinger.yml --tags local
 docker@me:/mnt/c/Users/irekromaniuk/Ansible/pinger$ ansible pingnet -a 'ls -l pinglist.txt' -o
 10.10.1.100 | CHANGED | rc=0 | (stdout) -rw-rw-r--. 1 docker docker 14444 Jul 14  2017 pinglist.txt
 10.20.1.100 | CHANGED | rc=0 | (stdout) -rw-rw-r--. 1 docker docker 14444 Jun 21 13:19 pinglist.txt
@@ -24,7 +24,7 @@ docker@me:/mnt/c/Users/irekromaniuk/Ansible/pinger$ ansible pingnet -a 'ls -l pi
 ```
 ### Dynamic inventory
 ```
-docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible/pinger$ python /pingfull.py -h
+docker@R90HE73F:/mnt/c/Users/irekromaniuk/Ansible/pinger$ python pingfull.py -h
 usage: pingfull.py [-h] [--list] [--host HOST] --file FILE
 
 optional arguments:
@@ -32,7 +32,7 @@ optional arguments:
   --list       list inventory
   --host HOST  show HOST variables
   --file FILE  YAML file to read inventory from
-docker@me:/mnt/c/Users/irekromaniuk/Ansible/pinger$ python /pingfull.py --list --file /pingfull.1.yml
+docker@me:/mnt/c/Users/irekromaniuk/Ansible/pinger$ python /pingfull.py --list --file pingfull.1.yml
 {
     "dc1notdc2": {
         "hosts": []
@@ -51,7 +51,7 @@ docker@me:/mnt/c/Users/irekromaniuk/Ansible/pinger$ python /pingfull.py --list -
 ```
 #### Playbook
 ```
-docker@me:/mnt/c/Users/irekromaniuk/Ansible/pinger$ ansible-playbook /pinger.yml
+docker@me:/mnt/c/Users/irekromaniuk/Ansible/pinger$ ansible-playbook pinger.yml
 
 PLAY [pingnet] *****************************************************************************************************************************************************************************************************************
 TASK [Gathering Facts] *********************************************************************************************************************************************************************************************************ok: [10.10.1.100]
