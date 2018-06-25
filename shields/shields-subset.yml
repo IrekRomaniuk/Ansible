@@ -1,4 +1,7 @@
 - hosts: "{{ groups['pingfull'] | shuffle }}" #groups['pingfull'][0:100]
+  vars:
+    output: 'output/cmd' 
+    filename: 'template/output.j2'
   gather_facts: no
   max_fail_percentage: 40
   serial: 5
@@ -9,3 +12,9 @@
       #ignore_errors: True 
     - debug: msg="{{ result.stdout }}"
       when: result.stdout is defined
+    - name: log foo_result to file
+      lineinfile:
+        line: "{{inventory_hostname}} === {{ result.stdout }}"
+        insertafter: EOF
+        dest: "{{output}}"
+      delegate_to: localhost

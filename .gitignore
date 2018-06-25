@@ -11,3 +11,4 @@ pinger/fetched/*
 vault*
 ping*
 shields/fetched/*
+shields/output/*
