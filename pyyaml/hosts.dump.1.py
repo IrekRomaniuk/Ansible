@@ -10,4 +10,4 @@ dc_dict={
             ['10.41.1.100','10.41.1.102']}
         }
 with open('hosts.yml', 'w') as outfile:
-    yaml.dump(dc_dict, outfile, default_flow_style=True)
+    yaml.dump(dc_dict, outfile, default_flow_style=False)

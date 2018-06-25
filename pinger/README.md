@@ -32,7 +32,7 @@ optional arguments:
   --list       list inventory
   --host HOST  show HOST variables
   --file FILE  YAML file to read inventory from
-docker@me:/mnt/c/Users/irekromaniuk/Ansible/pinger$ python /pingfull.py --list --file pingfull.1.yml
+docker@me:/mnt/c/Users/irekromaniuk/Ansible/pinger$ python pingfull.py --list --file pingfull.1.yml
 {
     "dc1notdc2": {
         "hosts": []

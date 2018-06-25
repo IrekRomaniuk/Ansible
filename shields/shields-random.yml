@@ -5,8 +5,9 @@
       groups: random_host
     #with_random_choice: "{{ groups['pingfull'] }}"
     with_items: "{{ groups['pingfull'] | random }}"
+    tags:
+      - local
 - hosts: random_host
-#- hosts: 10.199.107.1
   gather_facts: no  
   tasks:
     #- debug: var=inventory_hostname
@@ -14,5 +15,8 @@
       raw: "{{ cmd }}"
       register: result
       #ignore_errors: True 
+      tags:
+      - remote 
     - debug: msg="{{ result.stdout }}"
       when: result.stdout is defined    
+     
