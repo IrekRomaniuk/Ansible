@@ -1,0 +1,6 @@
+---
+ansible_user: indeni
+ansible_python_interpreter: /opt/CPsuite-R77/fw1/Python/bin/python
+transport: ssh
+host_key_checking: False
+scp_if_ssh: False

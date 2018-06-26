@@ -1,0 +1,14 @@
+- hosts: pingnet # cp-mgmt
+  gather_facts: no
+  tasks:
+  - name: Fetch from mgmt
+    fetch: 
+        src: ./checkosh-phcsv #./var/scripts/checkosh-phcsv
+        dest: ./fetched/checkosh-phcsv
+        flat: yes
+    ignore_errors: True    
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: Extract addresses
+      shell: awk -F',' '{print $1}' fetched/checkosh-phcsv > fetched/checkosh
