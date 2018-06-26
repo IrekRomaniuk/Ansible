@@ -1,5 +1,5 @@
 #ansible-playbook -i hosts shields-external.yml --tags "build, sample"
-#ansible-playbook -i hosts shields-external.yml -e cmd=ver
+#ansible-playbook -i hosts shields-external.yml -e cmd=ver -e ansible_user=admin -e ansible_ssh_pass='password'
 - hosts: pingnet # cp-mgmt
   gather_facts: no
   tasks:
