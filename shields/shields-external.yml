@@ -1,3 +1,5 @@
+#ansible-playbook -i hosts shields-external.yml --tags "build, sample"
+#ansible-playbook -i hosts shields-external.yml -e cmd=ver
 - hosts: pingnet # cp-mgmt
   gather_facts: no
   tasks:
@@ -8,7 +10,32 @@
         flat: yes
     ignore_errors: True    
 - hosts: localhost
+  gather_facts: no
   connection: local
   tasks:
     - name: Extract addresses
       shell: awk -F',' '{print $1}' fetched/checkosh-phcsv > fetched/checkosh
+    - name: Build Inventory
+      add_host: 
+        name: "{{item}}"
+        group: checkosh
+      with_lines: cat fetched/checkosh        
+      tags:
+        - build     
+- hosts: "{{ groups['checkosh'] | shuffle }}"
+  gather_facts: no
+  max_fail_percentage: 40
+  serial: 5
+  tasks: 
+    #- name Display sample   
+    #  debug: msg="{{inventory_hostname}}"
+    #  tags:
+    #    - sample
+    - name: task against the sample of inventory
+      raw: "{{ cmd }}"
+      register: result
+      #ignore_errors: True 
+    - debug: msg="{{ result.stdout }}"
+      when: result.stdout is defined
+        
+

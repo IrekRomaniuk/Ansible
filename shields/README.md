@@ -13,9 +13,9 @@ docker@me:/mnt/c/Users/irekromaniuk/Ansible/shields$ python fetched/pingfull.py 
 
 ```
 docker@me:...shields$ ansible-playbook -i fetched/pingfull.py shields-subset.yml -e cmd=uptime -e ansible_user=admin -e ansible_ssh_pass='password'
-docker@me:...shields$ ansible-playbook  shields-subset.yml -e 'cmd="show interface Internet1"' -e ansible_user=admin -e ansible_ssh_pass='CFN$@f3M@n@g35aN'
+docker@me:...shields$ ansible-playbook  shields-subset.yml -e 'cmd="show interface Internet1"' -e ansible_user=admin -e ansible_ssh_pass='password'
 ```
-also: ver, 'show interface Internet1'
+also: ver, 'show interface Internet1','show admin-access-ipv4-addresses'
 
 ### Retry 
 ```
