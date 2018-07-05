@@ -1,15 +1,21 @@
-#ansible-playbook -i hosts shields-external.yml --tags "build, sample"
+#ansible-playbook -i hosts shields-external.yml --skip-tags build
 #ansible-playbook -i hosts shields-external.yml -e cmd=ver -e ansible_user=admin -e ansible_ssh_pass='password'
+#ansible-playbook -i hosts shields-external.yml -e cmd=ver -e ansible_user=admin -e ansible_ssh_pass='password' --skip-tags fetch --forks 100
+#$ cat /mnt/c/Users/irekromaniuk/Ansible/shields/output/cmd-external | sed '/^\s*$/d' | wc -l
 - hosts: pingnet # cp-mgmt
+  tags:
+    - fetch
   gather_facts: no
   tasks:
-  - name: Fetch from mgmt
-    fetch: 
+    - name: Fetch from mgmt
+      fetch: 
         src: ./checkosh-phcsv #./var/scripts/checkosh-phcsv
         dest: ./fetched/checkosh-phcsv
         flat: yes
-    ignore_errors: True    
+      #ignore_errors: False      
 - hosts: localhost
+  tags:
+    - build
   gather_facts: no
   connection: local
   tasks:
@@ -19,13 +25,17 @@
       add_host: 
         name: "{{item}}"
         group: checkosh
-      with_lines: cat fetched/checkosh        
-      tags:
-        - build     
+      with_lines: cat fetched/checkosh
+      #changed_when: false
+      #no_log: True         
 - hosts: "{{ groups['checkosh'] | shuffle }}"
+  tags:
+    - build 
+  vars:
+    output: 'output/cmd-external'
   gather_facts: no
-  max_fail_percentage: 40
-  serial: 5
+  max_fail_percentage: 50
+  serial: 100
   tasks: 
     #- name Display sample   
     #  debug: msg="{{inventory_hostname}}"
@@ -37,5 +47,11 @@
       #ignore_errors: True 
     - debug: msg="{{ result.stdout }}"
       when: result.stdout is defined
+    - name: log results to file
+      lineinfile:
+        line: "{{inventory_hostname}} === {{ result.stdout }}"
+        insertafter: EOF
+        dest: "{{output}}"
+      delegate_to: localhost     
         
 

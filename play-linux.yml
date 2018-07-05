@@ -1,0 +1,18 @@
+---
+# 
+- hosts: linux
+  gather_facts: no
+  become: true
+  tasks:
+    - name: Add line to the file
+      lineinfile:
+        dest: /etc/ssh/sshd_config
+        line: "Ciphers aes128-ctr,aes192-ctr,aes256-ctr"
+        state: present
+        insertafter: "^# Ciphers and keying"
+        create: False
+      notify:
+      - restart sshd  
+  handlers:
+    - name: restart sshd
+      service: name=sshd state=restarted      
