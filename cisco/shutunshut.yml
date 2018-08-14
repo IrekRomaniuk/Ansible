@@ -1,0 +1,43 @@
+- hosts: core-DC1
+  tasks:
+    - name: shutdown interfaces on core in DC1
+      ios_config:
+        lines:
+          # PFW5250P ethernet21-22 to core
+          - description test core Ansible
+        parents: "{{ item }}"
+      with_items:
+        - interface Eth1/52
+        - interface Eth2/52
+
+- hosts: dmz-DC1
+  tasks:
+    - name: shutdown interfaces in dmz of DC1
+      ios_config:
+        lines:
+          # PFW5250P ethernet23-24 to core
+          - description test dmz Ansible
+        parents: "{{ item }}"
+      with_items:
+        - interface Eth1/53
+        - interface Eth1/54
+
+- hosts: border-DC1
+  tasks:
+    - name: shutdown interfaces on border switch in DC1
+      ios_config:
+        lines:
+          # PFW5250P ethernet1-4 to int
+          - description test border Ansible
+        parents: "{{ item }}"
+      with_items:
+        - interface Eth1/37
+        - interface Eth1/38
+        - interface Eth1/39
+        - interface Eth1/40
+
+
+
+        
+       
+
