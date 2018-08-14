@@ -1,18 +1,27 @@
 - hosts: core-DC1
-  tasks:
-    - name: shutdown interfaces on core in DC1
+  tags:
+    - test
+  tasks:  
+    #- name: shutdown interfaces on core in DC1 for old firewall
+    - name: show interfaces connected to firewall
+      #ios_interface:
+      ios_command:
+        #show int stat | i FW 
+        commands: 'show int stat | i FW'
+    - name: open interfaces on core in DC1 for new firewall
       ios_config:
+      #ios_interface:?  
         lines:
           # PFW5250P ethernet21-22 to core
           - description test core Ansible
         parents: "{{ item }}"
       with_items:
         - interface Eth1/52
-        - interface Eth2/52
+        - interface Eth2/52        
 
 - hosts: dmz-DC1
   tasks:
-    - name: shutdown interfaces in dmz of DC1
+    - name: open interfaces in dmz of DC1 for new firewall
       ios_config:
         lines:
           # PFW5250P ethernet23-24 to core
@@ -24,7 +33,7 @@
 
 - hosts: border-DC1
   tasks:
-    - name: shutdown interfaces on border switch in DC1
+    - name: open interfaces on border switch in DC1 for new firewall
       ios_config:
         lines:
           # PFW5250P ethernet1-4 to int
