@@ -8,12 +8,14 @@
       ios_command:
         #show int stat | i FW 
         commands: 'show int stat | i FW'
+      register: FWinterfaces
+    - debug: var=FWinterfaces.stdout_lines 
     - name: open interfaces on core in DC1 for new firewall
       ios_config:
       #ios_interface:?  
         lines:
           # PFW5250P ethernet21-22 to core
-          - description test core Ansible
+          - description PFW5250P ethernet21-22 to core
         parents: "{{ item }}"
       with_items:
         - interface Eth1/52
@@ -25,7 +27,7 @@
       ios_config:
         lines:
           # PFW5250P ethernet23-24 to core
-          - description test dmz Ansible
+          - description PFW5250P ethernet23-24 to core
         parents: "{{ item }}"
       with_items:
         - interface Eth1/53
@@ -37,7 +39,7 @@
       ios_config:
         lines:
           # PFW5250P ethernet1-4 to int
-          - description test border Ansible
+          - description PFW5250P ethernet1-4 to int
         parents: "{{ item }}"
       with_items:
         - interface Eth1/37
