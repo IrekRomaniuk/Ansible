@@ -1,6 +1,6 @@
 - hosts: "{{ groups['pingfull'] | shuffle }}" #groups['pingfull'][0:100]
   vars:
-    output: 'output/cmd' 
+    output: 'output/cmd2' 
     #filename: 'template/output.j2'
   gather_facts: no
   max_fail_percentage: 40
