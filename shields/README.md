@@ -1,3 +1,15 @@
+### On Linux:
+
+```
+mkdir fetched
+mkdir output
+touch outpout/cmd
+docker@ubuntu-DC1:~/Ansible/shields$ dos2unix fetched/pingfull.py
+sudo apt install sshpass
+chmod +x fetched/pingfull.py
+```
+
+
 ### Fetch inventory
 ```
 ansible-playbook -i hosts shields-inventory.yml
