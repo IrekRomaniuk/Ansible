@@ -6,6 +6,12 @@
         #show int stat | i PFWP 
         commands: 'show int stat | i "new PAN"'
       register: FWinterfaces
+    - name: log results to file
+      lineinfile:
+        line: "{{inventory_hostname}} === {{ FWinterfaces.stdout_lines }}"
+        insertafter: EOF
+        dest: "{{output}}"
+      delegate_to: localhost  
     - debug: var=FWinterfaces.stdout_lines          
 
 - hosts: dmz-DC1
@@ -16,6 +22,12 @@
         #show int stat | i PFWP
         commands: 'show int stat | i "new PAN"'
       register: FWinterfaces
+    - name: log results to file
+      lineinfile:
+        line: "{{inventory_hostname}} === {{ FWinterfaces.stdout_lines }}"
+        insertafter: EOF
+        dest: "{{output}}"
+      delegate_to: localhost  
     - debug: var=FWinterfaces.stdout_lines
 
 - hosts: border-DC1
@@ -26,6 +38,12 @@
         #show int stat | i PFWP 
         commands: 'show int stat | i "new PAN"'
       register: FWinterfaces
+    - name: log results to file
+      lineinfile:
+        line: "{{inventory_hostname}} === {{ FWinterfaces.stdout_lines }}"
+        insertafter: EOF
+        dest: "{{output}}"
+      delegate_to: localhost  
     - debug: var=FWinterfaces.stdout_lines
 
 
