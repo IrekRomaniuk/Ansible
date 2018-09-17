@@ -5,7 +5,7 @@
     - name: shut interfaces on core in DC1 for new firewall    
       ios_interface:
         name: "{{ item }}" 
-        enabled: False       
+        enabled: True       
       with_items:
         - interface Eth1/52
         - interface Eth2/52
@@ -21,7 +21,7 @@
     - name: shut interfaces on dmz in DC1 for new firewall    
       ios_interface:
         name: "{{ item }}" 
-        enabled: False       
+        enabled: True       
       with_items:
         - interface Eth1/53
         - interface Eth1/54
@@ -36,7 +36,7 @@
     - name: shut interfaces on border in DC1 for new firewall    
       ios_interface:
         name: "{{ item }}" 
-        enabled: False
+        enabled: true
       with_items:
         - interface Eth1/37
         - interface Eth1/38

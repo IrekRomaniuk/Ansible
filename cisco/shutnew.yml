@@ -1,51 +1,51 @@
 - hosts: core-DC1
   tags:
-    - test
+    - core
   tasks:  
-    #- name: shutdown interfaces on core in DC1 for old firewall
-    - name: show interfaces connected to firewall
-      #ios_interface:
-      ios_command:
-        #show int stat | i FW 
-        commands: 'show int stat | i FW'
-      register: FWinterfaces
-    - debug: var=FWinterfaces.stdout_lines 
-    - name: open interfaces on core in DC1 for new firewall
-      ios_config:
-      #ios_interface:?  
-        lines:
-          # PFW5250P ethernet21-22 to core
-          - description PFW5250P ethernet21-22 to core
-        parents: "{{ item }}"
+    - name: shut interfaces on core in DC1 for new firewall    
+      ios_interface:
+        name: "{{ item }}" 
+        enabled: False       
       with_items:
         - interface Eth1/52
-        - interface Eth2/52        
+        - interface Eth2/52
+        #- interface Po9
+        #- interface Po10
+      register: FWinterfaces
+    - debug: var=FWinterfaces.stdout_lines          
 
 - hosts: dmz-DC1
-  tasks:
-    - name: open interfaces in dmz of DC1 for new firewall
-      ios_config:
-        lines:
-          # PFW5250P ethernet23-24 to core
-          - description PFW5250P ethernet23-24 to core
-        parents: "{{ item }}"
+  tags:
+    - dmz
+  tasks:  
+    - name: shut interfaces on dmz in DC1 for new firewall    
+      ios_interface:
+        name: "{{ item }}" 
+        enabled: False       
       with_items:
         - interface Eth1/53
         - interface Eth1/54
+        #- interface Po11
+      register: FWinterfaces
+    - debug: var=FWinterfaces.stdout_lines 
 
 - hosts: border-DC1
-  tasks:
-    - name: open interfaces on border switch in DC1 for new firewall
-      ios_config:
-        lines:
-          # PFW5250P ethernet1-4 to int
-          - description PFW5250P ethernet1-4 to int
-        parents: "{{ item }}"
+   tags:
+    - border
+   tasks:  
+    - name: shut interfaces on border in DC1 for new firewall    
+      ios_interface:
+        name: "{{ item }}" 
+        enabled: False
       with_items:
         - interface Eth1/37
         - interface Eth1/38
         - interface Eth1/39
         - interface Eth1/40
+        #- interface Po10
+        #- interface Po9
+      register: FWinterfaces
+    - debug: var=FWinterfaces.stdout_lines 
 
 
 
