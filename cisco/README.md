@@ -10,6 +10,8 @@ ansible-playbook shutunshut.yml -e ansible_ssh_pass='password' --tags "test" --c
 
 ansible-playbook shutunshut.yml -e ansible_ssh_pass='password' --tags "test" 
 
+ansible-playbook showint.yml -e ansible_ssh_pass='password'
+
 ```
 # sh int statu | i Ansible
 Eth1/52       test core Ansible  xcvrAbsen routed    auto    auto    --

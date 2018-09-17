@@ -1,0 +1,54 @@
+- hosts: core-DC1
+  tags:
+    - core
+  tasks:  
+    - name: describe interfaces on core in DC1 for new firewall    
+      ios_interface:
+        name: "{{ item }}" 
+        description: new PAN Eth21-22       
+      with_items:
+        - interface Eth1/52
+        - interface Eth2/52
+        - interface Po9
+        - interface Po10
+      register: FWinterfaces
+    - debug: var=FWinterfaces.stdout_lines          
+
+- hosts: dmz-DC1
+  tags:
+    - dmz
+  tasks:  
+    - name: describe interfaces on dmz in DC1 for new firewall    
+      ios_interface:
+        name: "{{ item }}" 
+        description: new PAN Eth23-24       
+      with_items:
+        - interface Eth1/53
+        - interface Eth1/54
+        - interface Po11
+      register: FWinterfaces
+    - debug: var=FWinterfaces.stdout_lines 
+
+- hosts: border-DC1
+   tags:
+    - border
+   tasks:  
+    - name: describe interfaces on border in DC1 for new firewall    
+      ios_interface:
+        name: "{{ item }}" 
+        description: new PAN Eth1-4
+      with_items:
+        - interface Eth1/37
+        - interface Eth1/38
+        - interface Eth1/39
+        - interface Eth1/40
+        - interface Po10
+        - interface Po9
+      register: FWinterfaces
+    - debug: var=FWinterfaces.stdout_lines 
+
+
+
+        
+       
+

@@ -4,7 +4,7 @@
       #ios_interface:
       ios_command:
         #show int stat | i PFWP 
-        commands: 'show int stat | i PFWP'
+        commands: 'show int stat | i "new PAN"'
       register: FWinterfaces
     - name: log results to file
       lineinfile:
@@ -20,7 +20,7 @@
       #ios_interface:
       ios_command:
         #show int stat | i PFWP
-        commands: 'show int stat | i PFWP'
+        commands: 'show int stat | i "new PAN"'
       register: FWinterfaces
     - name: log results to file
       lineinfile:
@@ -36,7 +36,7 @@
       #ios_interface:
       ios_command:
         #show int stat | i PFWP 
-        commands: 'show int stat | i PFWP'
+        commands: 'show int stat | i "new PAN"'
       register: FWinterfaces
     - name: log results to file
       lineinfile:
