@@ -3,41 +3,39 @@
     - core
   tasks:  
     - name: shut interfaces on core in DC1 for new firewall    
-      ios_interface:
-        name: "{{ item }}" 
-        enabled: False
-      register: FWinterfaces         
+      ios_config:
+        lines:
+          - shutdown
+        parents: "{{ item }}"       
       with_items:
         - interface Eth1/52
         - interface Eth2/52
         #- interface Po9
-        #- interface Po10
-    - debug: var=FWinterfaces.stdout_lines          
+        #- interface Po10         
 
 - hosts: dmz-DC1
   tags:
     - dmz
   tasks:  
     - name: shut interfaces on dmz in DC1 for new firewall    
-      ios_interface:
-        name: "{{ item }}" 
-        enabled: False   
-      register: FWinterfaces    
+      ios_config:
+        lines:
+        - shutdown   
+        parents: "{{ item }}"  
       with_items:
         - interface Eth1/53
         - interface Eth1/54
         #- interface Po11      
-    - debug: var=FWinterfaces.stdout_lines 
 
 - hosts: border-DC1
    tags:
     - border
    tasks:  
     - name: shut interfaces on border in DC1 for new firewall    
-      ios_interface:
-        name: "{{ item }}" 
-        enabled: False
-      register: FWinterfaces
+      ios_config:
+        lines:
+          - shutdown   
+        parents: "{{ item }}" 
       with_items:
         - interface Eth1/37
         - interface Eth1/38
@@ -45,7 +43,6 @@
         - interface Eth1/40
         #- interface Po10
         #- interface Po9      
-    - debug: var=FWinterfaces.stdout_lines 
 
 
 

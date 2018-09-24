@@ -22,22 +22,8 @@
       ios_command:
         commands: "clear ip arp {{address}}"
       with_items:
-        - 10.34.11.1
-        - 10.34.17.1
-        - 10.34.20.1
-        - 10.34.22.1
-        - 10.34.23.1
-        - 10.34.31.1
-        - 10.34.32.1
-        - 10.34.40.1
         - 10.34.42.5
-        - 10.34.42.20   
-        - 10.34.72.1
-        - 10.34.1.1
-        - 10.34.172.1
-        - 10.34.188.1
-        - 10.34.237.1
-        - 10.254.253.1
+
 
 
 - hosts: dmz-DC1
@@ -59,43 +45,33 @@
       with_items:
         - interface Eth1/53
         - interface Eth1/54
-        #- interface Po11 
-    - name: clear arp
-      ios_command:
-        commands: "clear ip arp {{address}}"
-      with_items:
-        - 10.34.7.1
+        #- interface Po11     
 
 - hosts: border-DC1
-   tags:
-    - border
-   tasks:  
-    - name: shut interfaces on border in DC1 for old firewall    
-      ios_interface:
-        name: "{{ item }}" 
-        enabled: true
-      with_items:
-        - interface Eth1/6
-        - interface Eth1/8
-        - interface Eth1/16
-        #- interface Po10
-        #- interface Po9
-    - name: open interfaces on border in DC1 for new firewall    
-      ios_interface:
-        name: "{{ item }}" 
-        enabled: true
-      with_items:
-        - interface Eth1/37
-        - interface Eth1/38
-        - interface Eth1/39
-        - interface Eth1/40
-        #- interface Po10
-        #- interface Po9
-    - name: clear arp
-      ios_command:
-        commands: "clear ip arp {{address}}"
-      with_items:
-        - 10.34.        
+  tags:
+  - border
+  tasks:  
+  - name: shut interfaces on border in DC1 for old firewall    
+    ios_interface:
+      name: "{{ item }}" 
+      enabled: true
+    with_items:
+      - interface Eth1/6
+      - interface Eth1/8
+      - interface Eth1/16
+      #- interface Po10
+      #- interface Po9
+  - name: open interfaces on border in DC1 for new firewall    
+    ios_interface:
+      name: "{{ item }}" 
+      enabled: true
+    with_items:
+      - interface Eth1/37
+      - interface Eth1/38
+      - interface Eth1/39
+      - interface Eth1/40
+      #- interface Po10
+      #- interface Po9      
 
 
 

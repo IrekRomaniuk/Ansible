@@ -1,0 +1,14 @@
+  
+- name: load new acl 
+  ios_config:
+    lines:          
+      - 511 permit ip 10.41.1.100/32 any
+      - 512 permit ip 10.41.1.102/32 any
+    parents: ip access-list SSH-MANAGEMENT
+    match: exact           
+
+
+
+        
+       
+
