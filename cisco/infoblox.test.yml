@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    infoblox_host: '10.34.21.215'
+  tasks:
+    - name: test update an ipv4 host record
+      nios_host_record:
+        name: testhost.commonwealth.com
+        view: "Internal"
+        ipv4:
+          - address: "10.34.2.25"
+        state: present
+        comment: "Testing Infoblox Ansible integration"
+        provider: 
+          host: "{{ infoblox_host }}"
+          username: irekromaniuk
+          password: "{{ pass }}"
+    

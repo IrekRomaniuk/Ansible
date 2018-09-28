@@ -1,0 +1,66 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    infoblox_host: '10.34.21.215'
+  tasks:
+    - name: test update an ipv4 host record
+      nios_host_record:
+        name: testhost.commonwealth.com
+        view: "Internal"
+        ipv4:
+          - address: "10.34.2.25"
+        state: present
+        comment: "Testing Infoblox Ansible integration"
+        provider: 
+          host: "{{ infoblox_host }}"
+          username: irekromaniuk
+          password: "{{ pass }}"
+    - name: update pan1 host record
+      nios_host_record:
+        name: pan1.commonwealth.com
+        view: "Internal"
+        ipv4:
+          - address: "10.34.2.22"
+        state: present
+        comment: "Palo Alto firewall prod1"
+        provider: 
+          host: "{{ infoblox_host }}"
+          username: irekromaniuk
+          password: "{{ pass }}"
+    - name: update pan2 host record
+      nios_host_record:
+        name: pan2.commonwealth.com
+        view: "Internal"
+        ipv4:
+          - address: "10.34.2.23"
+        state: present
+        comment: "Palo Alto firewall prod2"
+        provider: 
+          host: "{{ infoblox_host }}"
+          username: irekromaniuk
+          password: "{{ pass }}"
+    - name: update qad1 host record
+      nios_host_record:
+        name: qad1.commonwealth.com
+        view: "Internal"
+        ipv4:
+          - address: "10.34.2.20"
+        state: present
+        comment: "Palo Alto firewall QA-DEV 1"
+        provider: 
+          host: "{{ infoblox_host }}"
+          username: irekromaniuk
+          password: "{{ pass }}"
+    - name: update qad2 host record
+      nios_host_record:
+        name: pan2.commonwealth.com
+        view: "Internal"
+        ipv4:
+          - address: "10.34.2.21"
+        state: present
+        comment: "Palo Alto firewall QA-DEV 1"
+        provider: 
+          host: "{{ infoblox_host }}"
+          username: irekromaniuk
+          password: "{{ pass }}"                   

@@ -19,3 +19,5 @@ ansible-playbook shutnew.yml -e ansible_ssh_pass='password' --tags "core"
 Eth1/52       test core Ansible  xcvrAbsen routed    auto    auto    --
 Eth2/52       test core Ansible  xcvrAbsen routed    auto    auto    --
 ```
+
+ansible-playbook infobloxold2new.yml -e pass='password'
