@@ -22,7 +22,8 @@
       with_items:
         - interface Eth1/6
         - interface Eth1/8
-        - interface Eth1/16 
+        - interface Eth1/16
+        - interface Eth1/15
    
 
 - hosts: dmz-DC1
