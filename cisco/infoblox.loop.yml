@@ -1,0 +1,24 @@
+---
+- hosts: localhost
+  connection: local
+  vars:
+    infoblox_host: '10.34.21.215'
+  tasks:
+    - name: test update an ipv4 host record
+      nios_host_record:
+        name: "{{ item.name }}"
+        view: "Internal"
+        ipv4:
+          - address: "{{ item.ip }}"
+        state: present
+        comment: "Testing Infoblox Ansible integration"
+        provider: 
+          host: "{{ infoblox_host }}"
+          username: irekromaniuk
+          password: "{{ pass }}"
+      with_items:
+        - {name: 'pan1.example.com', ip: '10.34.2.22'} 
+        - {name: 'pan2.example.com', ip: '10.34.2.23'} 
+        - {name: 'qad1.example.com', ip: '10.34.2.20'}  
+        - {name: 'qad2.example.com', ip: '10.34.2.21'}  
+                 

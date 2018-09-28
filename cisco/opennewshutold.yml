@@ -35,7 +35,7 @@
         - shutdown   
         parents: "{{ item }}"  
       with_items:
-        - interface Eth1/1
+        - interface Eth1/2
         - interface Eth1/3  
     - name: open interfaces on dmz in DC1 for new firewall    
       ios_config:
