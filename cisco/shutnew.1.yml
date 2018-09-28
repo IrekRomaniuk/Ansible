@@ -28,9 +28,9 @@
         #- interface Po11      
 
 - hosts: border-DC1
-   tags:
+  tags:
     - border
-   tasks:  
+  tasks:  
     - name: shut interfaces on border in DC1 for new firewall    
       ios_config:
         lines:

@@ -1,20 +1,11 @@
 - hosts: border-DC1
   tags:
     - border
-  tasks:  
-    - name: shut interfaces on border in DC1 for old firewall    
+  tasks:
+   - name: shut interfaces on border in DC1 for new firewall    
       ios_config:
         lines:
           - shutdown   
-        parents: "{{ item }}" 
-      with_items:
-        - interface Eth1/6
-        - interface Eth1/8
-        - interface Eth1/16 
-    - name: open interfaces on border in DC1 for new firewall    
-      ios_config:
-        lines:
-          - no shutdown   
         parents: "{{ item }}" 
       with_items:
         - interface Eth1/37
@@ -22,56 +13,68 @@
         - interface Eth1/39
         - interface Eth1/40
         #- interface Po10
-        #- interface Po9 
+        #- interface Po9   
+    - name: open interfaces on border in DC1 for old firewall    
+      ios_config:
+        lines:
+          - no shutdown   
+        parents: "{{ item }}" 
+      with_items:
+        - interface Eth1/6
+        - interface Eth1/8
+        - interface Eth1/16 
+   
 
 - hosts: dmz-DC1
   tags:
     - dmz
-   tasks:  
-    - name: shut interfaces on dmz in DC1 for old firewall    
+   tasks: 
+    - name: shut interfaces on dmz in DC1 for new firewall    
       ios_config:
         lines:
         - shutdown   
         parents: "{{ item }}"  
       with_items:
-        - interface Eth1/1
-        - interface Eth1/3  
-    - name: open interfaces on dmz in DC1 for new firewall    
+        - interface Eth1/53
+        - interface Eth1/54
+        #- interface Po11 
+    - name: open interfaces on dmz in DC1 for old firewall    
       ios_config:
         lines:
         - no shutdown   
         parents: "{{ item }}"  
       with_items:
-        - interface Eth1/53
-        - interface Eth1/54
-        #- interface Po11
+        - interface Eth1/1
+        - interface Eth1/3  
+   
 
 - hosts: core-DC1
   tags:
     - core
-  tasks:  
+  tasks: 
     - name: shut interfaces on core in DC1 for new firewall    
       ios_config:
         lines:
           - shutdown
         parents: "{{ item }}"       
       with_items:
-        - interface Eth1/1
-        - interface Eth1/2   
-    - name: open interfaces on core in DC1 for new firewall    
+        - interface Eth1/52
+        - interface Eth2/52
+        #- interface Po9
+        #- interface Po10 
+    - name: open interfaces on core in DC1 for old firewall    
       ios_config:
         lines:
           - no shutdown
         parents: "{{ item }}"       
       with_items:
-        - interface Eth1/52
-        - interface Eth2/52
-        #- interface Po9
-        #- interface Po10  
+        - interface Eth1/1
+        - interface Eth1/2 
     - name: clear ARP on core    
       ios_command:
         commands:
-          - clear ip arp 10.34.42.5            
+          - clear ip arp 10.34.42.5      
+             
 
       
 

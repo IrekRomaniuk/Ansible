@@ -10,8 +10,8 @@
       with_items:
         - interface Eth1/52
         - interface Eth2/52
-        - interface Po9
-        - interface Po10         
+        #- interface Po9
+        #- interface Po10         
 
 - hosts: dmz-DC1
   tags:
@@ -25,12 +25,12 @@
       with_items:
         - interface Eth1/53
         - interface Eth1/54
-        - interface Po11      
+        #- interface Po11      
 
 - hosts: border-DC1
-   tags:
+  tags:
     - border
-   tasks:  
+  tasks:  
     - name: shut interfaces on border in DC1 for new firewall    
       ios_config:
         lines:
@@ -41,8 +41,8 @@
         - interface Eth1/38
         - interface Eth1/39
         - interface Eth1/40
-        - interface Po10
-        - interface Po9      
+        #- interface Po10
+        #- interface Po9      
 
 
 
