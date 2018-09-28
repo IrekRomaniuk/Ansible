@@ -17,8 +17,8 @@
           username: irekromaniuk
           password: "{{ pass }}"
       with_items:
-        - {name: 'pan1.example.com', ip: '10.34.2.22'} 
-        - {name: 'pan2.example.com', ip: '10.34.2.23'} 
-        - {name: 'qad1.example.com', ip: '10.34.2.20'}  
-        - {name: 'qad2.example.com', ip: '10.34.2.21'}  
+        - {name: 'pan1.commonwealth.com', ip: '10.34.2.22'} 
+        - {name: 'pan2.commonwealth.com', ip: '10.34.2.23'} 
+        - {name: 'qad1.commonwealth.com', ip: '10.34.2.20'}  
+        - {name: 'qad2.commonwealth.com', ip: '10.34.2.21'}  
                  
