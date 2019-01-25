@@ -1,0 +1,16 @@
+- hosts: core-DC1
+  tasks:  
+    - name: show route
+      ios_command:
+        commands: 
+          - sh ip route 10.34.0.0
+      register: routes
+    - debug: var=routes.stdout_lines          
+
+
+
+
+
+        
+       
+
