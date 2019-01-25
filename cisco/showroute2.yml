@@ -1,0 +1,23 @@
+- hosts: core-DC1
+  tasks:  
+    - name: show route
+      ios_command:
+        commands: 
+          - sh ip route 10.34.0.0
+      register: routes
+    - debug: var=routes.stdout_lines 
+- hosts: core-DC1
+  tasks:  
+    - name: test next hop
+      ios_command:
+        commands: 
+          - sh ip route 10.34.0.0
+        wait_for: result[0] contains "*via 10.34.0.1"
+
+
+
+
+
+        
+       
+
