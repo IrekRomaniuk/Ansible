@@ -12,7 +12,7 @@
       ios_command:
         commands: 
           - sh ip route 10.34.0.0
-        wait_for: result[0] contains *via 10.34.0.1
+        wait_for: result[0] contains '*via 10.34.0.1'
 
 
 
